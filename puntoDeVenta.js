@@ -8,7 +8,7 @@ calcularTotal = function(){
     let valorSubtotal;
     let valorDescuento;
     let valorIVA;
-    let valorTotal;
+    let valorTotal=1;
     //1. Recuperar el nombre del producto como String
     nombreProducto=recuperarTexto("txtProducto")
     //2. Recuperar el precio como float
@@ -28,7 +28,9 @@ calcularTotal = function(){
             Si el caso de prueba es exitoso, hacer un commit
          */
     //6. Invocar a calcularDescuento y lo que devuelve guardar en la variable valorDescuento
+    valorDescuento= calcularValorDescuento(valorSubtotal,porcentajeDescuento)
     //7. Mostrar el resultado en el componente lblDescuento
+    mostrarTexto("lblDescuento",valorDescuento)
         /*
             Caso de prueba: 
                 precioProducto: 5.4  cantidad: 10 descuento: 10
@@ -36,22 +38,29 @@ calcularTotal = function(){
             Si el caso de prueba es exitoso, hacer un commit
          */
     //8. Invocar a calcularIVA y lo que devuelve guardar en la variable valorIVA
-    //9. Mostrar el resultado en el componente lblValorIVA    
+    valorIVA=calcularIva(valorSubtotal)
+    //9. Mostrar el resultado en el componente lblValorIVA   
+    mostrarTexto("lblValorIVA",valorIVA) 
     /*
             Caso de prueba: 
                 precioProducto: 5.4  cantidad: 10 descuento: 10
                 IVA esperado: 5.832
             Si el caso de prueba es exitoso, hacer un commit
         */
+
+
     //10. Invocar a calcularTotal y lo que devuelve guardar en la variable valorTotal
+    valorTotal= calcTotal(valorSubtotal,valorDescuento,valorIVA)
     //11. Mostrar el resultado en el componente lblTotal
-     /*
+    mostrarTexto("lblTotal",valorTotal)
+     /*DD
             Caso de prueba: 
                 precioProducto: 5.4  cantidad: 10 descuento: 10
                 Total esperado: 5.832
             Si el caso de prueba es exitoso, hacer un commit
         */
     //12. Mostrar un resumen en el componente lblResumen
+        mostrarTexto("lblResumen"," Valor a pagar por "+cantidad +" "+ nombreProducto+"con "+valorDescuento+"% de descuento: USD "+valorTotal+"")
         /*
             Ejemplo: 
                 Valor a pagar por 20 cerveza corona con 10% de descuento: USD 48.75
@@ -60,6 +69,15 @@ calcularTotal = function(){
     
 }   
 limpiar=function(){
+    mostrarTexto("lblResumen","")
+    mostrarTexto("lblTotal","0.0")
+    mostrarTexto("lblSubtotal","0.0")
+    mostrarTexto("lblDescuento","0.0")
+    mostrarTexto("lblValorIVA","0.0")
+    mostrarTextoEnCaja("txtProducto","")
+    mostrarTextoEnCaja("txtPrecio","0.0")
+    mostrarTextoEnCaja("txtCantidad","0")
+    mostrarTextoEnCaja("txtPorcentajeDescuento","0")
     /*
         Dejar todas las cajas de texto con el valor cadena vacía, 0 ó 0.0 según el tipo de dato
         Dejar todos los textos de los montos con el valor 0.0
